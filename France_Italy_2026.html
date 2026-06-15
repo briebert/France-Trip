@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>France & Italy 2026 — Brian & Elianne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2f4e;
+    --navy-light: #233d63;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #faf8f3;
+    --cream-dark: #f0ece0;
+    --text: #1a1a1a;
+    --text-mid: #4a4a4a;
+    --text-light: #7a7878;
+    --white: #ffffff;
+    --flight-bg: #e8f0fb;
+    --flight-border: #4a7fc1;
+    --hotel-bg: #e8f5ee;
+    --hotel-border: #3a9e6a;
+    --train-bg: #fef5e4;
+    --train-border: #d4912a;
+    --dining-bg: #fbe9e8;
+    --dining-border: #c0534e;
+    --activity-bg: #f0eafa;
+    --activity-border: #7c5cbf;
+    --note-bg: #f4f4f0;
+    --note-border: #999;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 2rem;
+  }
+
+  .hero-map {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+  }
+
+  .hero-map iframe {
+    width: 100%; height: 100%;
+    border: none; filter: grayscale(1) invert(1);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.0;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-pill {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light);
+    padding: 0.5rem 1.25rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.35);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: bounce 2s infinite;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    width: 1px;
+    height: 2rem;
+    background: rgba(255,255,255,0.2);
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── NAV ── */
+  /* ── TOP NAV (tablet & desktop) ── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--navy);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sticky-nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    -webkit-appearance: none;
+    appearance: none;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: rgba(255,255,255,0.55);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-bottom-color 0.2s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── BOTTOM TAB BAR (mobile only) ── */
+  .mobile-tab-bar {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .sticky-nav {
+      display: none;
+    }
+
+    .mobile-tab-bar {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--navy);
+      border-top: 1px solid rgba(201,168,76,0.3);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    .mobile-tab-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 10px 4px;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.45);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: color 0.15s;
+    }
+
+    .mobile-tab-btn.active {
+      color: var(--gold);
+    }
+
+    .mobile-tab-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    /* Push page content up so bottom tab bar doesn't cover it */
+    body {
+      padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    display: none;
+  }
+
+  .section.active {
+    display: block;
+    animation: fadeIn 0.35s ease;
+  }
+
+  @media (max-width: 768px) {
+    .section.active {
+      animation: none;
+    }
+    /* Extra bottom padding so content clears the fixed tab bar */
+    .overview-grid,
+    .map-section,
+    .itinerary-wrap,
+    .practical-wrap {
+      padding-bottom: 5rem;
+    }
+    /* Stack overview grid fully on phone */
+    .overview-grid {
+      grid-template-columns: 1fr;
+      padding: 1.25rem 1rem;
+      gap: 1rem;
+    }
+    .overview-route {
+      grid-column: 1;
+    }
+    /* Route table scrollable on small screens */
+    .route-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+    }
+    .route-row-header { display: none; }
+    .route-dest { font-size: 1rem; grid-column: 1 / -1; }
+    .route-nights { text-align: left; }
+    /* Confirmation rows */
+    .conf-row {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+    .conf-code { align-self: flex-start; }
+    /* Map tabs wrap nicely */
+    .map-tabs { gap: 0.4rem; }
+    .map-tab { font-size: 0.7rem; padding: 0.45rem 0.8rem; }
+    .map-frame-wrap { aspect-ratio: 4/3; min-height: 280px; }
+    /* Event rows on mobile */
+    .event {
+      grid-template-columns: 4px 75px 1fr;
+    }
+    .event-time { font-size: 0.72rem; padding: 0.75rem 0.5rem; min-width: 75px; }
+    .event-body { padding: 0.75rem 0.9rem; }
+    .event-desc { font-size: 0.85rem; }
+    .event-note { font-size: 0.75rem; }
+    /* Day header */
+    .day-info h4 { font-size: 1.05rem; }
+    .day-num { font-size: 1.6rem; min-width: 2rem; }
+    /* Practical cards */
+    .prac-card { grid-template-columns: 1fr; }
+    .prac-body { border-left: none; border-top: 3px solid var(--navy); }
+    /* Section title padding */
+    .section-title-wrap { padding: 2rem 1rem 0; }
+    .section-title { font-size: 1.8rem; }
+    /* Map section padding */
+    .map-section { padding: 1.5rem 1rem; }
+    .itinerary-wrap { padding: 1.5rem 1rem; }
+    .practical-wrap { padding: 1.5rem 1rem; }
+    /* Hero adjustments */
+    .hero { padding: 3rem 1.25rem; min-height: 85vh; }
+    .hero-meta { gap: 0.75rem; }
+    .hero-pill { font-size: 0.72rem; padding: 0.4rem 0.9rem; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── OVERVIEW ── */
+  .overview-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    .overview-grid { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(26,47,78,0.06);
+  }
+
+  .card-header {
+    background: var(--navy);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .card-header-icon { font-size: 1.1rem; }
+
+  .card-header h3 {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .card-body { padding: 1.5rem; }
+
+  .overview-route {
+    grid-column: 1 / -1;
+  }
+
+  .route-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 120px 80px;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 0.88rem;
+  }
+
+  .route-row:last-child { border-bottom: none; }
+
+  .route-row-header {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .route-dest {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .route-dates { color: var(--text-mid); font-size: 0.82rem; }
+  .route-acc { color: var(--text-mid); font-size: 0.82rem; }
+  .route-nights {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    text-align: center;
+  }
+
+  .conf-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 0.85rem;
+  }
+
+  .conf-row:last-child { border-bottom: none; }
+  .conf-label { color: var(--text-mid); line-height: 1.4; }
+  .conf-label strong { display: block; color: var(--text); font-weight: 500; margin-bottom: 0.15rem; }
+  .conf-code {
+    font-family: 'Jost', monospace;
+    font-weight: 600;
+    font-size: 0.82rem;
+    color: var(--navy);
+    background: var(--cream-dark);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ── MAP SECTION ── */
+  .map-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .map-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .map-tab {
+    background: var(--white);
+    border: 1.5px solid var(--cream-dark);
+    color: var(--text-mid);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .map-tab:hover { border-color: var(--gold); color: var(--navy); }
+  .map-tab.active { background: var(--navy); border-color: var(--navy); color: var(--gold); }
+
+  .map-frame-wrap {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(26,47,78,0.08);
+    aspect-ratio: 16/9;
+    min-height: 400px;
+  }
+
+  .map-frame-wrap iframe {
+    width: 100%; height: 100%; border: none;
+    display: block;
+  }
+
+  .map-caption {
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* ── ITINERARY ── */
+  .itinerary-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .day-block {
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(26,47,78,0.06);
+  }
+
+  .day-header {
+    background: var(--navy);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .day-header:hover { background: var(--navy-light); }
+
+  .day-header-left { display: flex; align-items: center; gap: 1rem; }
+
+  .day-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: rgba(201,168,76,0.5);
+    line-height: 1;
+    min-width: 2.5rem;
+  }
+
+  .day-info h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .day-info span {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .day-chevron {
+    color: rgba(255,255,255,0.3);
+    font-size: 1.2rem;
+    transition: transform 0.25s;
+  }
+
+  .day-block.open .day-chevron { transform: rotate(180deg); }
+
+  .day-events {
+    background: var(--white);
+    display: none;
+  }
+
+  .day-block.open .day-events { display: block; }
+
+  .event {
+    display: grid;
+    grid-template-columns: 5px 90px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .event:last-child { border-bottom: none; }
+
+  .event-stripe {
+    width: 5px;
+    min-height: 100%;
+    flex-shrink: 0;
+  }
+
+  .event-time {
+    padding: 1rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-light);
+    line-height: 1.3;
+    min-width: 90px;
+    border-right: 1px solid var(--cream-dark);
+  }
+
+  .event-type-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    margin-bottom: 0.3rem;
+  }
+
+  .event-body {
+    padding: 0.85rem 1.25rem;
+  }
+
+  .event-desc {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.5;
+    margin-bottom: 0.25rem;
+  }
+
+  .event-note {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* Event type colors */
+  .flight  { --ec: var(--flight-border);  --eb: var(--flight-bg); }
+  .hotel   { --ec: var(--hotel-border);   --eb: var(--hotel-bg); }
+  .train   { --ec: var(--train-border);   --eb: var(--train-bg); }
+  .dining  { --ec: var(--dining-border);  --eb: var(--dining-bg); }
+  .activity{ --ec: var(--activity-border);--eb: var(--activity-bg); }
+  .note    { --ec: var(--note-border);    --eb: var(--note-bg); }
+
+  .event-stripe { background: var(--ec, #ccc); }
+  .event-type-badge { background: var(--eb, #eee); color: var(--ec, #666); }
+
+  /* ── PRACTICAL ── */
+  .practical-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .prac-card {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(26,47,78,0.05);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
+
+  @media (max-width: 600px) {
+    .prac-card { grid-template-columns: 1fr; }
+  }
+
+  .prac-label {
+    background: var(--cream-dark);
+    padding: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .prac-label-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+  .prac-label-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+
+  .prac-body {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    border-left: 3px solid var(--navy);
+  }
+
+  .prac-body strong { color: var(--text); font-weight: 500; }
+
+  /* ── SECTION TITLE ── */
+  .section-title-wrap {
+    text-align: center;
+    padding: 3rem 2rem 0;
+  }
+
+  .section-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-sub {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ── ALERT BADGE ── */
+  .alert-badge {
+    background: #fff3cd;
+    border: 1px solid #f0c040;
+    border-left: 4px solid #d4912a;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+    color: #7a5c00;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+
+  .footer strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m40!1m12!1m3!1d5817244!2d7.2!3d45.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m25!3e0!4m5!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis%2C%20France!3m2!1d48.8566!2d2.3522!4m5!1s0x12cdaffeb3da0937%3A0x4d05e8f1cbf1dc4!2sNice%2C%20France!3m2!1d43.7102!2d7.262!4m5!1s0x12d4f86c2a6c!2sRoquebrune-Cap-Martin!3m2!1d43.7686!2d7.4706!4m5!1s0x477eb1daf1d63d89%3A0x74f9f0e2ffd3ba1c!2sVenice%2C%20Italy!3m2!1d45.4408!2d12.3155!5e0!3m2!1sen!2sus!4v1"
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">A Father–Daughter Adventure · June 16 – July 1, 2026</p>
+    <h1 class="hero-title">France<br><em>&amp; Italy</em></h1>
+    <p class="hero-sub">Brian &amp; Elianne Ebert</p>
+    <div class="hero-meta">
+      <span class="hero-pill">🇫🇷 Paris · 6 nights</span>
+      <span class="hero-pill">🌊 Côte d'Azur · 3 nights</span>
+      <span class="hero-pill">🇮🇹 Venice · 5 nights</span>
+      <span class="hero-pill">✈️ 16 days total</span>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</div>
+
+<!-- ═══ STICKY NAV ═══ -->
+<nav class="sticky-nav" id="topNav">
+  <button class="nav-btn active" onclick="showSection('overview', this, false)">Overview</button>
+  <button class="nav-btn" onclick="showSection('maps', this, false)">Maps</button>
+  <button class="nav-btn" onclick="showSection('itinerary', this, false)">Day by Day</button>
+  <button class="nav-btn" onclick="showSection('practical', this, false)">Practical Info</button>
+</nav>
+
+<!-- Mobile bottom tab bar -->
+<div class="mobile-tab-bar" id="mobileTabBar">
+  <button class="mobile-tab-btn active" id="mob-overview" onclick="showSection('overview', this, true)">
+    <span class="mobile-tab-icon">🗺️</span>Overview
+  </button>
+  <button class="mobile-tab-btn" id="mob-maps" onclick="showSection('maps', this, true)">
+    <span class="mobile-tab-icon">📍</span>Maps
+  </button>
+  <button class="mobile-tab-btn" id="mob-itinerary" onclick="showSection('itinerary', this, true)">
+    <span class="mobile-tab-icon">📅</span>Days
+  </button>
+  <button class="mobile-tab-btn" id="mob-practical" onclick="showSection('practical', this, true)">
+    <span class="mobile-tab-icon">ℹ️</span>Info
+  </button>
+</div>
+
+<!-- ═══ OVERVIEW ═══ -->
+<div class="section active" id="overview">
+  <div class="section-title-wrap">
+    <span class="section-eyebrow">Trip Summary</span>
+    <h2 class="section-title">Your Journey at a Glance</h2>
+    <p class="section-sub">All bookings confirmed · 16 days · 3 countries</p>
+  </div>
+
+  <div class="overview-grid">
+
+    <!-- Route overview -->
+    <div class="card overview-route">
+      <div class="card-header">
+        <span class="card-header-icon">🗺️</span>
+        <h3>Route & Accommodation</h3>
+      </div>
+      <div class="card-body">
+        <div class="route-row route-row-header">
+          <div>Destination</div><div>Dates</div><div>Accommodation</div><div style="text-align:center">Nights</div>
+        </div>
+        <div class="route-row">
+          <div class="route-dest">🇫🇷 Paris</div>
+          <div class="route-dates">Jun 17 – 23</div>
+          <div class="route-acc">Airbnb · 8 Rue Legouvé, 10th arr.</div>
+          <div class="route-nights">6</div>
+        </div>
+        <div class="route-row">
+          <div class="route-dest">🌊 Roquebrune</div>
+          <div class="route-dates">Jun 23 – 26</div>
+          <div class="route-acc">Airbnb · 182 Rue Claude Debussy</div>
+          <div class="route-nights">3</div>
+        </div>
+        <div class="route-row">
+          <div class="route-dest">🇮🇹 Venice</div>
+          <div class="route-dates">Jun 26 – 30</div>
+          <div class="route-acc">Airbnb Falier 2 · Calle Falier 118b</div>
+          <div class="route-nights">4</div>
+        </div>
+        <div class="route-row">
+          <div class="route-dest">🛫 VCE Airport</div>
+          <div class="route-dates">Jun 30 – Jul 1</div>
+          <div class="route-acc">Ca Tessera Venice Airport Hotel</div>
+          <div class="route-nights">1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flights -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-header-icon">✈️</span>
+        <h3>Flights</h3>
+      </div>
+      <div class="card-body">
+        <div class="conf-row">
+          <div class="conf-label">
+            <strong>Delta — Portland → Paris CDG</strong>
+            Tue Jun 16 · PDX 12:23pm → SEA 1:34pm → CDG 1:50pm (Wed)<br>
+            Delta 3802 + Delta 80 · Seats 13C &amp; 13J
+          </div>
+          <span class="conf-code">GT9CUY</span>
+        </div>
+        <div class="conf-row">
+          <div class="conf-label">
+            <strong>easyJet — Nice → Venice</strong>
+            Fri Jun 26 · Nice T2 9:10pm → VCE 10:20pm<br>
+            EJU1697 · Seats 8A (Elianne) &amp; 8B (Brian)
+          </div>
+          <span class="conf-code">KCMPDWL</span>
+        </div>
+        <div class="conf-row">
+          <div class="conf-label">
+            <strong>Delta — Venice → Portland</strong>
+            Wed Jul 1 · VCE 6:00am → AMS 7:50am → PDX 11:10am<br>
+            Delta 9275 + Delta 9216 · Seats 21E &amp; 22J
+          </div>
+          <span class="conf-code">GT9CUY</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Train + Dining -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-header-icon">🚄</span>
+        <h3>Train &amp; Dining</h3>
+      </div>
+      <div class="card-body">
+        <div class="conf-row">
+          <div class="conf-label">
+            <strong>SNCF TGV — Paris → Nice</strong>
+            Mon Jun 23 · Gare de Lyon 08:22 → Nice-Ville 14:10
+          </div>
+          <span class="conf-code">859EH7</span>
+        </div>
+        <div class="conf-row">
+          <div class="conf-label">
+            <strong>La Jacobine — Paris</strong>
+            Sun Jun 21 (Father's Day!) · 7:30pm · 2 guests<br>
+            59–61 Rue Saint-André des Arts, 75006 Paris
+          </div>
+          <span class="conf-code">Confirmed ✓</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotels -->
+    <div class="card overview-route">
+      <div class="card-header">
+        <span class="card-header-icon">🏨</span>
+        <h3>All Booking Confirmations</h3>
+      </div>
+      <div class="card-body">
+        <div class="conf-row">
+          <div class="conf-label">
+            <strong>Paris Airbnb · "Superbe appart au cœur de Paris"</strong>
+            Jun 17–23 · 8 Rue Legouvé, 75010 · Travel insurance: Generali/Airbnb ✓
+          </div>
+          <span class="conf-code">Airbnb ✓</span>
+        </div>
+        <div class="conf-row">
+          <div class="conf-label">
+            <strong>Côte d'Azur Airbnb · "Beau 2P avec jardin, Piscine, Parking, AC"</strong>
+            Jun 23–26 · 182 Rue Claude Debussy, 06190 Roquebrune-Cap-Martin · Host: Amo
+          </div>
+          <span class="conf-code">Airbnb ✓</span>
+        </div>
+        <div class="conf-row">
+          <div class="conf-label">
+            <strong>Venice Airbnb · "Falier 2" · Host: Anastasia</strong>
+            Jun 26–30 · Calle Falier 118b, 30135 Venice · Travel insurance: Generali/Airbnb ✓
+          </div>
+          <span class="conf-code">Airbnb ✓</span>
+        </div>
+        <div class="conf-row">
+          <div class="conf-label">
+            <strong>Ca Tessera Venice Airport Hotel</strong>
+            Jun 30–Jul 1 · PIN: 4425 · €136 non-refundable<br>
+            +39 041 541 5522 · info@catessera.it
+          </div>
+          <span class="conf-code">103638741</span>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ MAPS ═══ -->
+<div class="section" id="maps">
+  <div class="section-title-wrap">
+    <span class="section-eyebrow">Interactive Maps</span>
+    <h2 class="section-title">Explore Each Destination</h2>
+    <p class="section-sub">Click a destination to explore the map</p>
+  </div>
+  <div class="map-section">
+    <div class="map-tabs">
+      <button class="map-tab active" onclick="showMap('route', this)">🗺 Full Route</button>
+      <button class="map-tab" onclick="showMap('paris', this)">🇫🇷 Paris</button>
+      <button class="map-tab" onclick="showMap('airbnb-paris', this)">🏠 Paris Airbnb</button>
+      <button class="map-tab" onclick="showMap('jacobine', this)">🍽 La Jacobine</button>
+      <button class="map-tab" onclick="showMap('cote', this)">🌊 Côte d'Azur</button>
+      <button class="map-tab" onclick="showMap('monaco', this)">🎰 Monaco</button>
+      <button class="map-tab" onclick="showMap('nice-airport', this)">✈ Nice Airport</button>
+      <button class="map-tab" onclick="showMap('venice', this)">🇮🇹 Venice</button>
+      <button class="map-tab" onclick="showMap('falier', this)">🏠 Venice Airbnb</button>
+      <button class="map-tab" onclick="showMap('catessera', this)">🏨 Ca Tessera</button>
+    </div>
+
+    <div class="map-frame-wrap">
+      <iframe id="mapFrame"
+        src="https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d4600000!2d7.9!3d45.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e0!4m5!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!3m2!1d48.8566!2d2.3522!4m5!1s0x12cdaffeb3da0937%3A0x4d05e8f1cbf1dc4!2sNice!3m2!1d43.7102!2d7.262!4m5!1s0x12d51af43f7c3819%3A0xd3e0e17e3e3b92a4!2sRoquebrune-Cap-Martin!3m2!1d43.7686!2d7.4706!4m5!1s0x12d4f4d90d98c8ab%3A0x6f97e38ac02b4f67!2sMonaco!3m2!1d43.7384!2d7.4246!4m5!1s0x477eb1daf1d63d89%3A0x74f9f0e2ffd3ba1c!2sVenice!3m2!1d45.4408!2d12.3155!4m5!1s0x477eb1daf1d63d89%3A0x74f9f0e2ffd3ba1c!2sVenice+Marco+Polo+Airport!3m2!1d45.5052!2d12.3519!5e0!3m2!1sen!2sus!4v1"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <p class="map-caption" id="mapCaption">Your full route: Portland → Paris → Côte d'Azur → Venice → Portland</p>
+  </div>
+</div>
+
+<!-- ═══ ITINERARY ═══ -->
+<div class="section" id="itinerary">
+  <div class="section-title-wrap">
+    <span class="section-eyebrow">Day by Day</span>
+    <h2 class="section-title">Full Itinerary</h2>
+    <p class="section-sub">Click any day to expand · All times local</p>
+  </div>
+  <div class="itinerary-wrap">
+
+
+
+    <!-- Days injected by JS -->
+    <div id="days-container"></div>
+
+  </div>
+</div>
+
+<!-- ═══ PRACTICAL ═══ -->
+<div class="section" id="practical">
+  <div class="section-title-wrap">
+    <span class="section-eyebrow">Need to Know</span>
+    <h2 class="section-title">Practical Information</h2>
+    <p class="section-sub">Everything you need before and during the trip</p>
+  </div>
+  <div class="practical-wrap">
+
+    <div class="prac-card">
+      <div class="prac-label"><span class="prac-label-icon">📋</span><span class="prac-label-text">Passports &amp; Documents</span></div>
+      <div class="prac-body">Ensure <strong>both passports</strong> are valid at least 6 months past July 1, 2026. Scan passports into the <strong>Fly Delta app</strong> before departure. Elianne's SkyMiles number: #9642259346. Delta check-in opens <strong>24 hours before</strong> each flight — download Fly Delta app.</div>
+    </div>
+
+    <div class="prac-card">
+      <div class="prac-label"><span class="prac-label-icon">✈️</span><span class="prac-label-text">easyJet — Check In NOW</span></div>
+      <div class="prac-body"><strong>Check-in is open!</strong> Go to easyjet.com or the easyJet app and check in for your Jun 26 Nice→Venice flight (ref: KCMPDWL). <strong>Bag drop opens 18:40, closes 20:10. Check-in closes 60 min before departure.</strong> Cabin bags only: 1 large (56×45×25cm) + 1 small under-seat bag (45×36×20cm) per person.</div>
+    </div>
+
+    <div class="prac-card">
+      <div class="prac-label"><span class="prac-label-icon">🚄</span><span class="prac-label-text">SNCF Train</span></div>
+      <div class="prac-body">Download <strong>SNCF Connect app</strong> and retrieve tickets using folder ref <strong>859EH7</strong>. Departs Paris Gare de Lyon <strong>08:22</strong>, arrives Nice-Ville <strong>14:10</strong> — same day, ~5.5 hrs. Arrive at Gare de Lyon at least 30 min early; platform announced ~20 min before departure. Snack car available.</div>
+    </div>
+
+    <div class="prac-card">
+      <div class="prac-label"><span class="prac-label-icon">🏠</span><span class="prac-label-text">Ca Tessera Hotel</span></div>
+      <div class="prac-body">Reservation <strong>103638741</strong> · PIN: <strong>4425</strong> · €136 paid · <strong>NON-REFUNDABLE</strong>. Address: Via Orlanda 2, Tessera (Venice Airport). Phone: <strong>+39 041 541 5522</strong>. Steps from the terminal. Set multiple alarms — Delta 9275 departs at <strong>6:00 AM</strong>; aim to be at check-in by 4:00 AM.</div>
+    </div>
+
+    <div class="prac-card">
+      <div class="prac-label"><span class="prac-label-icon">💳</span><span class="prac-label-text">Money &amp; Payments</span></div>
+      <div class="prac-body">France and Italy use <strong>Euro (€)</strong>. <strong>Notify your bank</strong> of travel dates before departure. Visa/Mastercard accepted almost everywhere; Amex less reliable in small Italian establishments. Use city ATMs — avoid airport exchange counters. Travel insurance active via Generali/Airbnb for Paris and Venice stays.</div>
+    </div>
+
+    <div class="prac-card">
+      <div class="prac-label"><span class="prac-label-icon">📱</span><span class="prac-label-text">Apps to Download</span></div>
+      <div class="prac-body"><strong>Fly Delta</strong> · <strong>easyJet</strong> · <strong>SNCF Connect</strong> (train tickets) · <strong>Airbnb</strong> · <strong>Google Maps</strong> — download offline maps for Paris, Nice/Roquebrune, and Venice before leaving the US · <strong>Google Translate</strong> — download French and Italian offline packs · <strong>Vaporetto VE</strong> for Venice water buses</div>
+    </div>
+
+    <div class="prac-card">
+      <div class="prac-label"><span class="prac-label-icon">⛵</span><span class="prac-label-text">Venice Transport</span></div>
+      <div class="prac-body">Venice has no cars — everything is on foot or by <strong>vaporetto</strong> (water bus). Buy a <strong>24-hr (€25) or 48-hr (€35) pass</strong> rather than single tickets. Line 1 travels the Grand Canal. Line 4.1/4.2 → Murano. Line 12 → Burano. <strong>Rolling luggage is difficult</strong> — cobblestones, canal bridges, narrow alleys. Pack soft-sided bags for Venice if possible. Airport transfer: Alilaguna Blue Line (~70 min, €9) or ATVO express bus (~20 min, €10) from Piazzale Roma.</div>
+    </div>
+
+    <div class="prac-card">
+      <div class="prac-label"><span class="prac-label-icon">🎟️</span><span class="prac-label-text">Pre-Book These</span></div>
+      <div class="prac-body"><strong>Sainte-Chapelle</strong> Paris · <strong>Doge's Palace Venice</strong> — palazzoducale.visitmuve.it · <strong>Peggy Guggenheim</strong> — guggenheim-venice.it · La Jacobine dinner ✓ already booked!</div>
+    </div>
+
+    <div class="prac-card">
+      <div class="prac-label"><span class="prac-label-icon">🆘</span><span class="prac-label-text">Emergency Contacts</span></div>
+      <div class="prac-body"><strong>US Embassy Paris:</strong> +33 1 43 12 22 22 · <strong>US Embassy Rome (Italy):</strong> +39 06 46741 · <strong>European Emergency:</strong> 112 (works everywhere) · <strong>Airbnb support:</strong> +1 415 800 5959 · <strong>easyJet:</strong> easyjet.com/help · <strong>Ca Tessera:</strong> +39 041 541 5522 · <strong>Delta:</strong> +1 800 221 1212</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <strong>France &amp; Italy 2026 · Brian &amp; Elianne Ebert</strong> · June 16 – July 1 · Built from your Gmail &amp; Calendar · Bon voyage! 🇫🇷❤️🇮🇹
+</footer>
+
+<script>
+// ── NAV ──
+function showSection(id, btn, fromMobile) {
+  // Hide all sections
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+  // Show target section
+  var target = document.getElementById(id);
+  if (target) target.classList.add('active');
+
+  // Update top nav buttons
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+  // Update mobile tab buttons
+  document.querySelectorAll('.mobile-tab-btn').forEach(b => b.classList.remove('active'));
+
+  // Activate the right button in both navs
+  btn.classList.add('active');
+
+  // Sync the opposite nav
+  var sectionIds = ['overview', 'maps', 'itinerary', 'practical'];
+  var idx = sectionIds.indexOf(id);
+  if (fromMobile) {
+    // sync top nav
+    var topBtns = document.querySelectorAll('.nav-btn');
+    if (topBtns[idx]) topBtns[idx].classList.add('active');
+  } else {
+    // sync mobile tab bar
+    var mobIds = ['mob-overview', 'mob-maps', 'mob-itinerary', 'mob-practical'];
+    var mobBtn = document.getElementById(mobIds[idx]);
+    if (mobBtn) mobBtn.classList.add('active');
+  }
+
+  // Scroll to top of content (not the nav) on mobile, top of nav on desktop
+  var isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  } else {
+    var nav = document.querySelector('.sticky-nav');
+    if (nav) window.scrollTo({ top: nav.offsetTop, behavior: 'smooth' });
+  }
+}
+
+// ── MAPS ──
+const MAPS = {
+  route: {
+    src: "https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d4600000!2d7.9!3d45.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e0!4m5!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!3m2!1d48.8566!2d2.3522!4m5!1s0x12cdaffeb3da0937%3A0x4d05e8f1cbf1dc4!2sNice!3m2!1d43.7102!2d7.262!4m5!1s0x12d51af43f7c3819%3A0xd3e0e17e3e3b92a4!2sRoquebrune-Cap-Martin!3m2!1d43.7686!2d7.4706!4m5!1s0x12d4f4d90d98c8ab%3A0x6f97e38ac02b4f67!2sMonaco!3m2!1d43.7384!2d7.4246!4m5!1s0x477eb1daf1d63d89%3A0x74f9f0e2ffd3ba1c!2sVenice!3m2!1d45.4408!2d12.3155!4m5!1s0x477eb1daf1d63d89%3A0x74f9f0e2ffd3ba1c!2sVenice+Marco+Polo+Airport!3m2!1d45.5052!2d12.3519!5e0!3m2!1sen!2sus!4v1",
+    caption: "Full route: Paris → Côte d'Azur / Roquebrune → Monaco area → Venice"
+  },
+  paris: {
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998!2d2.3155!3d48.8698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis%2C%20France!5e0!3m2!1sen!2sus!4v1",
+    caption: "Paris — Jun 17–23. Your Airbnb is in the 10th arrondissement (Canal Saint-Martin area)."
+  },
+  'airbnb-paris': {
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623!2d2.3622!3d48.8717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66d9a8b3b3b3b%3A0x0!2s8+Rue+Legouvé%2C+75010+Paris%2C+France!5e0!3m2!1sen!2sus!4v1",
+    caption: "Your Paris Airbnb — 8 Rue Legouvé, 75010 Paris (10th arrondissement, near Canal Saint-Martin)"
+  },
+  jacobine: {
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624!2d2.3415!3d48.8534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671c3b42e5b5b%3A0x8c9e5f6a0d3c3e6!2sLa+Jacobine%2C+59+Rue+Saint-Andr%C3%A9+des+Arts%2C+75006+Paris!5e0!3m2!1sen!2sus!4v1",
+    caption: "La Jacobine — 59-61 Rue Saint-André des Arts, 75006 Paris · Father's Day dinner · Jun 21 · 7:30pm ✓"
+  },
+  cote: {
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d45000!2d7.45!3d43.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d51af43f7c3819%3A0xd3e0e17e3e3b92a4!2sRoquebrune-Cap-Martin%2C%20France!5e0!3m2!1sen!2sus!4v1",
+    caption: "Côte d'Azur — Roquebrune-Cap-Martin · Jun 23–26. Pool, garden, parking, AC. Monaco is 10 min away."
+  },
+  monaco: {
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11000!2d7.42!3d43.74!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d4f4d90d98c8ab%3A0x6f97e38ac02b4f67!2sMonaco!5e0!3m2!1sen!2sus!4v1",
+    caption: "Monaco — Take the #100 bus from Roquebrune (~20 min, ~€2). Prince's Palace, Casino Monte-Carlo, Oceanographic Museum."
+  },
+  'nice-airport': {
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15000!2d7.215!3d43.665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cdd2ba4f70e4e7%3A0x580dc2b3c59b4e8!2sNice+Côte+d'Azur+Airport!5e0!3m2!1sen!2sus!4v1",
+    caption: "Nice Côte d'Azur Airport Terminal 2 — easyJet EJU1697 departs 9:10pm Jun 26. Bag drop opens 18:40."
+  },
+  venice: {
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22000!2d12.335!3d45.435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477eb1daf1d63d89%3A0x74f9f0e2ffd3ba1c!2sVenice%2C%20Metropolitan%20City%20of%20Venice%2C%20Italy!5e0!3m2!1sen!2sus!4v1",
+    caption: "Venice — Jun 26–30. No cars! Navigate by foot and vaporetto. Buy a 24hr or 48hr vaporetto pass."
+  },
+  falier: {
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d12.327!3d45.437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477eb1e4b3c3b3b3%3A0x0!2sCalle+Falier%2C+118b%2C+30135+Venice!5e0!3m2!1sen!2sus!4v1",
+    caption: "Your Venice Airbnb — Falier 2 · Calle Falier 118b, 30135 Venice · 10 min walk from train/bus stations at Piazzale Roma"
+  },
+  catessera: {
+    src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5000!2d12.348!3d45.505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477eb5b3b3b3b3b3%3A0x0!2sCa+Tessera+Venice+Airport%2C+Via+Orlanda+2%2C+Tessera!5e0!3m2!1sen!2sus!4v1",
+    caption: "Ca Tessera Venice Airport · Via Orlanda 2 · Steps from VCE terminal · Reservation 103638741 · PIN 4425 · Jun 30–Jul 1"
+  }
+};
+
+function showMap(id, btn) {
+  const map = MAPS[id];
+  if (!map) return;
+  document.getElementById('mapFrame').src = map.src;
+  document.getElementById('mapCaption').textContent = map.caption;
+  document.querySelectorAll('.map-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── ITINERARY DATA ──
+const DAYS = [
+  {
+    n: 1, date: "Tuesday, June 16", city: "Portland → Paris", country: "travel",
+    events: [
+      { type: "flight", time: "12:23 PM", desc: "Delta 3802 — Portland PDX → Seattle SEA", note: "Seat 13C (Brian) · Delta Main Extra class" },
+      { type: "flight", time: "6:50 PM", desc: "Delta 80 — Seattle SEA → Paris CDG (overnight)", note: "Arrives Wed Jun 17 at 1:50 PM Paris time · Confirmation GT9CUY · Ticket #0062420437016" },
+    ]
+  },
+  {
+    n: 2, date: "Wednesday, June 17", city: "🇫🇷 Arrive Paris", country: "france",
+    events: [
+      { type: "flight", time: "1:50 PM", desc: "Arrive Paris Charles de Gaulle (CDG)", note: "Go through customs/immigration · collect bags" },
+      { type: "note", time: "Transfer", desc: "RER B train from CDG → central Paris (~45 min)", note: "Buy Navigo pass or carnet at airport station · direction: Robinson/Antony" },
+      { type: "hotel", time: "From 3 PM", desc: "Check in — Airbnb \"Superbe appart au cœur de Paris\"", note: "8 Rue Legouvé, 75010 Paris · 10th arrondissement near Canal Saint-Martin · Contact host via Airbnb app" },
+      { type: "activity", time: "Evening", desc: "Rest and explore Canal Saint-Martin neighborhood", note: "Grab dinner at a local café — you've earned it after a transatlantic flight" },
+    ]
+  },
+  {
+    n: 3, date: "Thursday, June 18", city: "🇫🇷 Paris, France", country: "france",
+    events: [
+      { type: "activity", time: "Morning", desc: "Coffee and croissants near the Airbnb — take it slow", note: "Wander Canal Saint-Martin / Du Pain et Des Idées on Rue Yves Toudic is one of the finest bakeries in Paris — a short stroll from the Airbnb / Sit outside with a café au lait / No agenda, just Paris in the morning" },
+      { type: "activity", time: "Late Morning", desc: "Passages Couverts — 19th-century covered arcades", note: "2nd arrondissement · Galerie Vivienne and Passage des Panoramas are the most spectacular · Free to walk through · Quirky shops, old bookstores, cafés · A gentle and unhurried morning" },
+      { type: "explore", time: "Lunch & Afternoon", desc: "Wander freely — no agenda, rest when you feel like it", note: "You have been traveling for two days · Let Elianne set the pace · Find a nice spot for lunch, sit in a park, drift along the Seine · This is a recovery day as much as an exploration day" },
+      { type: "note", time: "Late Afternoon", desc: "Head back to the Airbnb — rest and maybe a nap before the big evening", note: "Dinner is late and the cruise is at 10:45 PM · A proper rest now will make the evening so much better · You deserve it after the transatlantic flight and arrival day" },
+      { type: "dining", time: "~8:30–10:00 PM", desc: "Café de l\'Industrie — dinner before the Seine cruise", note: "16 Rue Saint-Sabin, 75011 · Warm colonial-era décor · No reservations · Aim to finish by 10:00 PM to make the cruise on time" },
+      { type: "activity", time: "10:00 PM", desc: "Head to Pont Neuf for the Seine cruise", note: "Metro Line 7 to Pont Neuf station or ~15 min walk · Board at 1 Square du Vert-Galant, Île de la Cité · Arrive by 10:30 PM" },
+      { type: "activity", time: "10:45 PM", desc: "Vedettes du Pont Neuf — Seine cruise & Eiffel Tower light show", note: "1 hour cruise from Square du Vert-Galant, foot of Pont Neuf · Watch the Eiffel Tower sparkle at 11:00 PM · Commentary in English and French · Phone: +33 1 46 33 98 38 · JR\'s art installation on Pont Neuf is best seen from the water right now!" },
+    ]
+  },
+  {
+  n: 4, date: "Friday, June 19", city: "🇫🇷 Paris, France", country: "france",
+    events: [
+      { type: "activity", time: "Morning", desc: "Slow morning — coffee, croissant, wander at your own pace", note: "No agenda · Explore whichever direction feels right · Browse a bookshop, sit in a café, stroll along the Seine · Let the city come to you" },
+      { type: "explore", time: "Late Morning", desc: "Le Marais — Place des Vosges, kilo vintage shops, Rue des Rosiers", note: "Kilo Shop on Rue de la Verrerie · Place des Vosges is the oldest planned square in Paris — beautiful for a rest · Rue des Rosiers for the Jewish quarter atmosphere" },
+      { type: "dining", time: "Lunch", desc: "Grab lunch in Le Marais before the museum", note: "Plenty of great casual spots along Rue de Bretagne or near Place des Vosges · Give yourselves a little rest before the afternoon" },
+      { type: "activity", time: "2:00 PM", desc: "Musée d\'Orsay — tickets booked for 2:00 PM ✓", note: "Quai Anatole France, 75007 · Impressionist masterpieces — Monet, Renoir, Van Gogh, Degas, Cézanne · Allow ~2 hours · The building itself is a stunning converted railway station · Metro: Solférino (Line 12) or RER C" },
+      { type: "dining", time: "Treat", desc: "Une Glace à Paris — exceptional artisan ice cream", note: "One of the best in the city · Small-batch, inventive flavors · A perfect pick-me-up after the museum" },
+      { type: "explore", time: "~4:30 PM", desc: "Stroll along the Seine from the Orsay toward Montmartre", note: "Metro Line 12 north or walk through Saint-Germain · Drift at your own pace" },
+      { type: "activity", time: "Late PM", desc: "Montmartre — Sacré-Cœur at dusk, funiculaire up, artist quarter", note: "Stunning panoramic views of Paris lighting up for the evening · Place du Tertre for the artists · A great spot to rest on the steps and take it all in with Elianne" },
+      { type: "dining", time: "Dinner", desc: "Dinner in Montmartre — Le Bistrot du Maquis or Loulou Montmartre", note: "Le Bistrot du Maquis: 69 Rue Lamarck, 75018 · 11 min walk from Sacré-Cœur · Classic French bistro, veteran chef, unpretentious and excellent · OR Loulou Montmartre: top of Rue Lamarck · Creative small plates, natural wine, panoramic rooftop views" },
+    ]
+  },
+  {
+  n: 5, date: "Saturday, June 20", city: "🇫🇷 Paris morning → Palaiseau party", country: "france",
+    events: [
+      { type: "activity", time: "Morning", desc: "Île Saint-Louis & Notre-Dame area — a gentle, beautiful morning stroll", note: "One of the most charming corners of Paris · Île Saint-Louis has wonderful ice cream, crêpes, and quiet streets · Perfect low-key start before an afternoon party" },
+      { type: "dining", time: "Late Morning", desc: "Café or crêpe on Île Saint-Louis — take your time", note: "Berthillon ice cream is the famous spot here if you want a treat before heading out" },
+      { type: "note", time: "~2:00 PM", desc: "Head back to Airbnb to freshen up and get ready for the party", note: "Smart-casual is fine for an afternoon party · Leave for Lozère around 3:00–3:15 PM" },
+      { type: "train", time: "~3:15 PM", desc: "RER B → Lozère station, Palaiseau", note: "Board at Saint-Michel–Notre-Dame · Direction Saint-Rémy-lès-Chevreuse · ~30 min · Every 20 min · Tickets ~€5–7 each · 8 min walk to 11 Boulevard de Palaiseau · Arrives at 4:00 PM" },
+      { type: "activity", time: "4:00 PM", desc: "Arrive at Casado family home — 11 Boulevard de Palaiseau", note: "Didier & Marie-Josie · Anne-Laure · Guillaume & Cristina Casado · Thomas & Léa · Afternoon celebration party following Thomas\'s First Communion and Léa\'s Confirmation · A lovely chance for Elianne to meet her French family!" },
+      { type: "activity", time: "Afternoon & evening", desc: "Family party — eat, celebrate, catch up with your Paris cousins", note: "No agenda needed · Let the afternoon unfold at its own lovely pace" },
+      { type: "train", time: "When ready", desc: "RER B back to central Paris — Lozère → Saint-Michel–Notre-Dame", note: "Direction Mitry-Claye · Trains run until after 1 AM · ~30 min back to the 10th arr." },
+    ]
+  },
+  {
+  n: 6, date: "Sunday, June 21 — Father's Day! 🎉", city: "🇫🇷 Paris", country: "france",
+    events: [
+      { type: "activity", time: "Morning", desc: "Île de la Cité — Notre-Dame exterior, Sainte-Chapelle stained glass", note: "Book Sainte-Chapelle tickets in advance — stunning Gothic stained glass, unlike anything else in Paris" },
+      { type: "dining", time: "Lunch", desc: "Chez Gladines — hearty Basque bistro, open all day every day", note: "Near Notre-Dame · Perfect post-Sainte-Chapelle lunch stop · Known for enormous portions and low prices · No reservation needed" },
+      { type: "activity", time: "Afternoon", desc: "Latin Quarter, Shakespeare & Company bookshop, Jardin du Luxembourg", note: "Shakespeare & Company is free to browse — a legendary Paris institution · Jardin du Luxembourg is a beautiful place to rest between lunch and dinner" },
+      { type: "dining", time: "7:30 PM", desc: "🍽 La Jacobine — RESERVATION CONFIRMED ✓", note: "59–61 Rue Saint-André des Arts, 75006 Paris (Saint-Germain-des-Prés) · 2 guests · Under Brian Ebert · Happy Father's Day!" },
+      { type: "dining", time: "After dinner", desc: "Amorino Gelato — artisan Italian gelato in a flower-shaped cone", note: "4 Rue de Buci, 75006 · 3 min walk from La Jacobine · Open until midnight on Sundays · Multiple flavors pressed into a beautiful flower on the cone — Elianne will love it · Try mango, pistachio, or tiramisu" },
+    ]
+  },
+  {
+    n: 7, date: "Monday, June 22", city: "🎡 Disneyland Paris", country: "france",
+    events: [
+      { type: "activity", time: "Morning", desc: "Disneyland Paris — Marne-la-Vallée (RER A from central Paris, ~40 min)", note: "Buy tickets in advance at disneylandparis.com · Park opens at 9:30 AM · RER A from Châtelet-Les-Halles or Gare de Lyon direction Marne-la-Vallée–Chessy · The resort has two parks: Disneyland Park and Walt Disney Studios Park" },
+      { type: "activity", time: "All day", desc: "Full day at Disneyland Paris with Elianne!", note: "Top rides: Phantom Manor, Big Thunder Mountain, Star Wars Hyperspace Mountain, Ratatouille: The Adventure (Studios park) · Check the app for wait times and show schedules · Grab a baguette hot dog — a Disneyland Paris classic" },
+      { type: "note", time: "Evening", desc: "Return to Paris Airbnb and pack for tomorrow's early train", note: "Last night at 8 Rue Legouvé — pack tonight so the morning is smooth. Train departs 8:22 AM from Gare de Lyon." },
+    ]
+  },
+  {
+    n: 8, date: "Tuesday, June 23", city: "🇫🇷 Paris → Côte d'Azur", country: "france",
+    events: [
+      { type: "hotel", time: "Morning", desc: "Check out of Paris Airbnb", note: "Head to Gare de Lyon — allow at least 30 min to get there from the 10th arrondissement" },
+      { type: "train", time: "8:22 AM", desc: "🚄 TGV — Paris Gare de Lyon → Nice-Ville", note: "SNCF ref: 859EH7 · Retrieve tickets in SNCF Connect app · Arrives Nice 14:10 (same day, ~5.5 hrs) · Snack car available" },
+      { type: "note", time: "2:10 PM", desc: "Arrive Nice-Ville station", note: "Freshen up, grab a coffee — you've got time before the next connection" },
+      { type: "train", time: "~2:30–3:00 PM", desc: "SNCF TER regional train — Nice-Ville → Cap-Martin–Roquebrune", note: "Direct, no changes · ~29–30 min · 17 km · Scenic coastal ride hugging the Mediterranean · 54 trains/day so just catch the next one · Tickets ~€6–8, buy at the station kiosk or on SNCF Connect" },
+      { type: "hotel", time: "Afternoon", desc: "Check in — Airbnb \"Beau 2P avec jardin, Piscine, Parking & AC\"", note: "182 Rue Claude Debussy, 06190 Roquebrune-Cap-Martin · Host: Amo · Pool, garden, AC, parking · 3 nights" },
+    ]
+  },
+  {
+    n: 9, date: "Wednesday, June 24", city: "🌊 Roquebrune-Cap-Martin", country: "france",
+    events: [
+      { type: "activity", time: "Morning", desc: "Explore Roquebrune — medieval hilltop village above the sea", note: null },
+      { type: "activity", time: "Afternoon", desc: "Cap Martin coastal path (Sentier du Littoral)", note: "3 km walk along dramatic cliffs with turquoise water below · Stunning views toward Monaco" },
+      { type: "dining", time: "Evening", desc: "Dinner in Menton or local restaurant in Roquebrune", note: null },
+    ]
+  },
+  {
+    n: 10, date: "Thursday, June 25", city: "🌊 Rest day — pool & the beach", country: "france",
+    events: [
+      { type: "activity", time: "Morning", desc: "Lazy morning at the Airbnb — coffee in the garden, pool time", note: "You\'ve earned a slow morning · The pool, garden, AC, and parking are all yours · A perfect rest day after several busy days" },
+      { type: "activity", time: "Late Morning", desc: "Swim and relax at the Airbnb pool", note: "182 Rue Claude Debussy · Let Elianne have a proper splash and decompress time before the travel days ahead" },
+      { type: "activity", time: "Afternoon", desc: "Plage de Carnolès — the closest beach, with lifeguards, restaurants & water sports", note: "Long pebble beach on the eastern side of Cap Martin toward Menton · Supervised swimming in season · Mattresses & sunshades for rent · Easy to reach by car or the Carnolès TER train stop" },
+      { type: "note", time: "For sandy beach", desc: "Sablettes Beach, Menton — sandy beach just 5 km east (one TER stop)", note: "If you want actual sand rather than pebbles, Sablettes de Menton is the nearest sandy beach · TER train one stop east from Cap-Martin–Roquebrune station · Very easy trip" },
+      { type: "dining", time: "Evening", desc: "Dinner back in Roquebrune or at a beachside restaurant at Carnolès", note: "A relaxed end to a relaxed day · Last evening on the Côte d\'Azur — soak it up!" },
+    ]
+  },
+  {
+    n: 11, date: "Friday, June 26", city: "🌊 Nice → ✈️ → 🇮🇹 Venice", country: "travel",
+    events: [
+      { type: "activity", time: "Morning", desc: "Nice — Promenade des Anglais, Vieux-Nice market, Colline du Château", note: "Free panoramic views from Colline du Château (take the lift or stairs)" },
+      { type: "hotel", time: "By noon", desc: "Check out of Roquebrune Airbnb", note: "Pack and arrange transport to Nice Airport Terminal 2" },
+      { type: "note", time: "Afternoon", desc: "Travel to Nice Côte d'Azur Airport, Terminal 2", note: "Allow extra time for airport in summer · Taxi or bus from Nice center (~30 min)" },
+      { type: "flight", time: "9:10 PM", desc: "✈ easyJet EJU1697 — Nice T2 (NCE) → Venice Marco Polo (VCE)", note: "Ref: KCMPDWL · Brian: Seat 8B · Elianne: Seat 8A · Arrives 10:20 PM · Bag drop opens 18:40, closes 20:10" },
+      { type: "hotel", time: "Late night", desc: "Check in — Airbnb Falier 2 · Calle Falier 118b, Venice", note: "Host: Anastasia · Contact via Airbnb app for arrival instructions · Vaporetto from airport → Ferrovia stop, then short walk" },
+    ]
+  },
+  {
+    n: 12, date: "Saturday, June 27", city: "🇮🇹 Venice", country: "italy",
+    events: [
+      { type: "activity", time: "Morning", desc: "Rialto Bridge & the famous Rialto Market (busiest early AM)", note: "Best produce and fish market in Venice · Very lively early morning" },
+      { type: "activity", time: "Late AM", desc: "Line 1 vaporetto — Grand Canal end-to-end orientation ride", note: "Buy 24-hr or 48-hr pass at the vaporetto station — much better value than single tickets" },
+      { type: "activity", time: "Afternoon", desc: "St. Mark's Square — Basilica di San Marco (reserve free entry online)", note: "Doge's Palace — book at palazzoducale.visitmuve.it · Bridge of Sighs visible from Ponte della Paglia" },
+      { type: "dining", time: "Evening", desc: "Aperol spritz aperitivo in Dorsoduro · cicchetti (Venetian tapas) at a bacaro", note: "Skip restaurants around San Marco — head to Dorsoduro or Cannaregio for authentic local food" },
+    ]
+  },
+  {
+    n: 13, date: "Sunday, June 28", city: "🇮🇹 Murano & Burano", country: "italy",
+    events: [
+      { type: "activity", time: "Morning", desc: "Murano Island — glassblowing demonstrations", note: "Vaporetto Line 4.1 or 4.2 from Fondamente Nove (~15 min) · Demos are free at glass factories, no obligation to buy" },
+      { type: "activity", time: "Afternoon", desc: "Burano Island — colorful lace-making island", note: "From Murano: Line 12 → Burano (~30 min) · Incredibly photogenic · Return via Fondamente Nove" },
+      { type: "dining", time: "Evening", desc: "Dinner in Cannaregio — authentic neighborhood away from tourist crowds", note: "Try bigoli in salsa (pasta with anchovy sauce) or sarde in saor (sweet-sour sardines)" },
+    ]
+  },
+  {
+    n: 14, date: "Monday, June 29", city: "🇮🇹 Venice — last full day", country: "italy",
+    events: [
+      { type: "activity", time: "Morning", desc: "Peggy Guggenheim Collection — world-class modern art on the Grand Canal", note: "Open Mon–Sun 10 AM–6 PM (closed Tuesdays) · Book at guggenheim-venice.it" },
+      { type: "activity", time: "Afternoon", desc: "Wander freely — get happily lost in Venice's labyrinth of streets", note: "Venice's streets are intentionally confusing; surrender to wandering and you'll find the best things" },
+      { type: "activity", time: "Late PM", desc: "Gondola ride — the quintessential Venice experience", note: "~€80–90 for 30 min (negotiate at the gondola station before boarding). Worth every cent on a last evening." },
+      { type: "dining", time: "Evening", desc: "Final dinner in Venice — celebrate the whole trip!", note: null },
+    ]
+  },
+  {
+    n: 15, date: "Tuesday, June 30", city: "🇮🇹 Venice → Airport", country: "italy",
+    events: [
+      { type: "hotel", time: "Morning", desc: "Check out of Falier 2 Airbnb", note: "Pack everything — you're heading to the airport hotel tonight" },
+      { type: "note", time: "Midday", desc: "Transfer to Venice Marco Polo Airport area", note: "Alilaguna Blue Line water bus (~70 min, €9 pp) from near San Marco · OR ATVO express bus from Piazzale Roma (~20 min, €10 pp). Allow 2+ hrs." },
+      { type: "hotel", time: "Afternoon", desc: "Check in — Ca Tessera Venice Airport", note: "Reservation: 103638741 · PIN: 4425 · Via Orlanda 2, Tessera · +39 041 541 5522 · €136 paid · Steps from the terminal" },
+      { type: "note", time: "Evening", desc: "Set multiple alarms — Delta 9275 departs 6:00 AM tomorrow!", note: "Aim to be at the airport check-in desk by 4:00 AM. Ca Tessera is adjacent to the terminal — very short walk." },
+    ]
+  },
+  {
+    n: 16, date: "Wednesday, July 1", city: "✈️ Venice → Portland", country: "travel",
+    events: [
+      { type: "note", time: "4:00 AM", desc: "Head to Venice Marco Polo Airport (VCE)", note: "Ca Tessera is steps from the terminal · Allow time to grab coffee and relax before security" },
+      { type: "flight", time: "6:00 AM", desc: "Delta 9275 — Venice VCE → Amsterdam AMS", note: "Seat 21E · Arrives Amsterdam 7:50 AM · Conf GT9CUY" },
+      { type: "flight", time: "10:25 AM", desc: "Delta 9216 — Amsterdam AMS → Portland PDX", note: "Seat 22J · Arrives Portland 11:10 AM (same day!) · Final leg home" },
+      { type: "activity", time: "11:10 AM", desc: "🏠 Welcome home to Portland!", note: "You'll have crossed 9 time zones — the city will feel like 8 PM but it's barely noon. You both deserve a nap." },
+    ]
+  },
+];
+
+// ── BUILD ITINERARY ──
+function buildDays() {
+  const container = document.getElementById('days-container');
+  DAYS.forEach(day => {
+    const block = document.createElement('div');
+    block.className = 'day-block';
+    if (day.n === 1 || day.n === 2) block.classList.add('open');
+
+    block.innerHTML = `
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-header-left">
+          <span class="day-num">${String(day.n).padStart(2,'0')}</span>
+          <div class="day-info">
+            <h4>${day.city}</h4>
+            <span>${day.date}</span>
+          </div>
+        </div>
+        <span class="day-chevron">▼</span>
+      </div>
+      <div class="day-events">
+        ${day.events.map(ev => `
+          <div class="event ${ev.type}">
+            <div class="event-stripe"></div>
+            <div class="event-time">
+              <span class="event-type-badge">${ev.type.toUpperCase()}</span><br>
+              ${ev.time}
+            </div>
+            <div class="event-body">
+              <div class="event-desc">${ev.desc}</div>
+              ${ev.note ? `<div class="event-note">${ev.note}</div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    container.appendChild(block);
+  });
+}
+
+function toggleDay(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+buildDays();
+</script>
+</body>
+</html>
